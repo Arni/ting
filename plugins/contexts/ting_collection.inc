@@ -20,6 +20,13 @@ $plugin = array(
  * are not always created from the UI.
  */
 function ting_ting_collection_create($empty, $data = NULL, $conf = FALSE) {
+  $query = drupal_get_query_parameters(); 
+  if (isset($query) && isset($query['searchstring']) && isset($query['number'])) {
+    $path = request_path();
+    $log_entry = $path . ',' . $query['searchstring'] . ',' . $query['number'] . ',' . date("d-m-Y") . "\r\n";
+    file_put_contents('/var/www/drupalvm/drupal/debug/searchlog', $log_entry, FILE_APPEND);
+  }
+  
   $context = new ctools_context('ting_collection');
   $context->plugin = 'ting_collection';
   $collection_id = FALSE;
