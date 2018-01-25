@@ -23,7 +23,7 @@ function ting_ting_collection_create($empty, $data = NULL, $conf = FALSE) {
   $query = drupal_get_query_parameters(); 
   if (isset($query) && isset($query['searchstring']) && isset($query['number'])) {
     $path = request_path();
-    $log_entry = $path . ',' . $query['searchstring'] . ',' . $query['number'] . ',' . date("d-m-Y") . "\r\n";
+    $log_entry = $path . ',' . $query['searchstring'] . ',' . $query['number'] . ',' . date("d-m-Y H:i") . "\r\n";
     file_put_contents('/var/www/drupalvm/drupal/debug/searchlog', $log_entry, FILE_APPEND);
   }
   
