@@ -311,8 +311,11 @@ function ting_do_search($query, $page = 1, $results_per_page = 10, $options = ar
 
   // Apply custom boosts if any.
   $boosts = variable_get('ting_boost_fields', array());
-
-  if ($boosts) {
+  
+  if (isset($options['querySpecificBoost'])) {
+    $request->userDefinedBoost = $options['querySpecificBoost'];
+  }
+  else if ($boosts) {
     $uboosts = array();
     foreach ($boosts as $boost_field) {
       $uboosts[] = array(
